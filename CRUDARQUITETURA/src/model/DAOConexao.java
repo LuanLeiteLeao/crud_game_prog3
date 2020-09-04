@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import util.Configuracoes;
 
 //teste kaleb
+//test Luan
 public class DAOConexao {
 
 	protected Connection con;
