@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import util.Configuracoes;
 
+//teste kaleb
 public class DAOConexao {
 
 	protected Connection con;
