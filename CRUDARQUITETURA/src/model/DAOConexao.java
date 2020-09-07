@@ -3,6 +3,8 @@ package model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
+
 import util.Configuracoes;
 
 //teste kaleb
@@ -33,4 +35,5 @@ public class DAOConexao {
 			throw new RuntimeException("DAOFuncionarioSQL erro(1):" + e.getMessage());
 		}
 	}
+
 }

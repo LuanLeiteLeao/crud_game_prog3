@@ -6,21 +6,12 @@ import java.util.List;
 import model.DAOGeneric;
 import model.Tabela;
 
-public class Pessoa extends Tabela {
+public class Pessoa extends Tabela<Integer> {
 
-	private Integer id;
 	private String nome;
 	private String sobreNome;
 	private Integer idade;
 	private Integer petFk;
-
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;
@@ -55,7 +46,7 @@ public class Pessoa extends Tabela {
 	}
 
 	@Override
-	protected String getNomeTabela() {
+	public String getNomeTabela() {
 
 		return "pessoa";
 	}
@@ -63,7 +54,7 @@ public class Pessoa extends Tabela {
 	@Override
 	public void setCamposTabela(List<Object> list) {
 
-		setId((Integer) list.get(0));
+		setPk((Integer) list.get(0));
 		setNome((String) list.get(1));
 		setSobreNome((String) list.get(2));
 		setIdade((Integer) list.get(3));
@@ -84,9 +75,16 @@ public class Pessoa extends Tabela {
 		ArrayList<Pessoa> list = dao.listar(pes);
 
 		for (Pessoa pessoa : list) {
-			System.out.println(pessoa.getNome() + "" + pessoa.getId() + "" + pessoa.getIdade() + ""
+			System.out.println(pessoa.getNome() + "" + pessoa.getPk() + "" + pessoa.getIdade() + ""
 					+ pessoa.getSobreNome() + "" + pessoa.getPetFk());
 		}
+		
+		System.out.println(dao.remover(list.get(0)));
+	}
+
+	@Override
+	public String getNomePk() {
+		return "id";
 	}
 
 }
