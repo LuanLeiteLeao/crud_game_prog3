@@ -67,24 +67,55 @@ public class Pessoa extends Tabela<Integer> {
 		return new Pessoa();
 	}
 
-
-	public static void main(String[] args) {
-		Pessoa pes = new Pessoa();
-		DAOGeneric dao = new DAOGeneric();
-
-		ArrayList<Pessoa> list = dao.listar(pes);
-
-		for (Pessoa pessoa : list) {
-			System.out.println(pessoa.getNome() + "" + pessoa.getPk() + "" + pessoa.getIdade() + ""
-					+ pessoa.getSobreNome() + "" + pessoa.getPetFk());
-		}
-		
-		System.out.println(dao.remover(list.get(0)));
-	}
-
 	@Override
 	public String getNomePk() {
 		return "id";
 	}
+
+	@Override
+	public List<Object> getCamposValor() {
+		List<Object> list = new ArrayList<>();
+		list.add(getPk());
+		list.add(getNome());
+		list.add(getSobreNome());
+		list.add(getIdade());
+		list.add(getPetFk());
+		return list;
+	}
+
+	@Override
+	public List<String> getCamposNome() {
+		List<String> list = new ArrayList<>();
+		list.add("id");
+		list.add("nome");
+		list.add("sobre_nome");
+		list.add("idade");
+		list.add("pet");
+		return list;
+	}
+
+	@Override
+	public Boolean isPkSerial() {
+		return true;
+	}
+	
+	public static void main(String[] args) {
+		Pessoa pes = new Pessoa();
+		DAOGeneric dao = new DAOGeneric();
+		
+		Pessoa p = new Pessoa();
+		
+		p.setNome("Galinha");
+		p.setSobreNome("Leite");
+		p.setIdade(19);
+		p.setPetFk(2);
+		
+		ArrayList<Pessoa> a = dao.listar(pes);
+		a.get(0).setNome("Galinha LOka");
+		//dao.inserir(p);
+		dao.atualizar(a.get(0));
+	}
+
+	
 
 }
