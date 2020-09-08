@@ -12,5 +12,6 @@ public abstract class MensagemGeneric  {
 	protected abstract void setMensagemErro();
 	protected abstract  void setMensagemSucesso();
 	
-	
+//deixar ela mais genérica 
+//	tem metodos que deveria esta aqui 
 }

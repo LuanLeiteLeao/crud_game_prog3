@@ -11,6 +11,7 @@ import mensagem.PersistenciaMensagem;
 public class DAOGeneric extends DAOConexao {
 	private PersistenciaMensagem mensagem = new PersistenciaMensagem();
 
+//	ao invez de herdar fazer referencia ao objeto
 	public DAOGeneric() {
 		super();
 
@@ -26,6 +27,8 @@ public class DAOGeneric extends DAOConexao {
 	}
 
 	public <T extends Tabela<?>> ArrayList<T> listar(T tabela) {
+//		nao é bom passar *, nao é uma boa pratica
+//		passar a lista de campos, pois aordem de campos pode mudar
 		String sqlSelect = "select * from " + tabela.getNomeTabela();
 		ArrayList<T> lista = new ArrayList<>();
 		PreparedStatement stmt;
@@ -55,13 +58,13 @@ public class DAOGeneric extends DAOConexao {
 
 	public <T extends Tabela<?>> String atualizar(T tabela) {
 		PreparedStatement stmt;
-		if(tabela.getPk()==null) {
+		if (tabela.getPk() == null) {
 			System.out.println("Erro ao atualizar ID nulo");
 			return "ID nulo";
 		}
-		
-		String sql = "UPDATE  " + tabela.getNomeTabela() + " SET " + prepararNomeCampoAtualizar(tabela) + " WHERE " + tabela.getNomePk()
-				+ "=" + tabela.getPk();
+
+		String sql = "UPDATE  " + tabela.getNomeTabela() + " SET " + prepararNomeCampoAtualizar(tabela) + " WHERE "
+				+ tabela.getNomePk() + "=" + tabela.getPk();
 		try {
 			stmt = (PreparedStatement) this.con.prepareStatement(sql);
 			System.out.println(sql);
@@ -84,14 +87,17 @@ public class DAOGeneric extends DAOConexao {
 		List<Object> camposValor = tabela.getCamposValor();
 		int indice = 0;
 		String formato = "";
-		if (camposNome.size() != camposValor.size())
+		if (camposNome.size() != camposValor.size()) {
 			return "os metodos getCamposNome() e tabela.getCamposValor() não foram preenchidos da maneira correta pois não contem o mesmo tamanho";
-
-		if (tabela.isPkSerial())
+		}
+		
+		if (tabela.isPkSerial()) {
 			indice = 1;
-
+		}
+//		(? ? ? ?)
+//		setObjet()
 		for (; indice < camposNome.size(); indice++) {
-			formato += camposNome.get(indice) + "=" + "'"+camposValor.get(indice) +"'"+" ,";
+			formato += camposNome.get(indice) + "=" + "'" + camposValor.get(indice) + "'" + " ,";
 		}
 
 		formato = formato.substring(0, formato.length() - 1) + "";
@@ -118,10 +124,9 @@ public class DAOGeneric extends DAOConexao {
 	public <T extends Tabela<?>> String prepararCamposNome(T tabela) {
 		List<String> camposNome = tabela.getCamposNome();
 
-
 		if (tabela.isPkSerial())
 			camposNome.remove(0);
-		
+
 		String formato = "(";
 
 		for (String campo : camposNome) {
@@ -139,7 +144,6 @@ public class DAOGeneric extends DAOConexao {
 		if (tabela.isPkSerial())
 			camposNome.remove(0);
 
-		
 		String formato = "(";
 
 		for (Object campo : camposNome)
