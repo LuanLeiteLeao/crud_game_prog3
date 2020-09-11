@@ -25,6 +25,7 @@ public abstract class Tabela<TipoPK> {
 	public abstract List<Object> getCamposValor(); 
 	public abstract List<String> getCamposNome();
 	public abstract Boolean isPkSerial();
+	public abstract List<String> getNomeColuna();
 	
 	
 }

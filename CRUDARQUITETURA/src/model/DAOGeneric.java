@@ -11,7 +11,6 @@ import mensagem.PersistenciaMensagem;
 public class DAOGeneric extends DAOConexao {
 	private PersistenciaMensagem mensagem = new PersistenciaMensagem();
 
-//	ao invez de herdar fazer referencia ao objeto
 	public DAOGeneric() {
 		super();
 
@@ -29,10 +28,10 @@ public class DAOGeneric extends DAOConexao {
 	public <T extends Tabela<?>> ArrayList<T> listar(T tabela) {
 //		nao é bom passar *, nao é uma boa pratica
 //		passar a lista de campos, pois aordem de campos pode mudar
-		String sqlSelect = "select * from " + tabela.getNomeTabela();
+		String sqlSelect = "select " + tabela.getNomeColuna() + " from " + tabela.getNomeTabela();
 		ArrayList<T> lista = new ArrayList<>();
 		PreparedStatement stmt;
-
+		System.out.println(sqlSelect);
 		try {
 			stmt = (PreparedStatement) this.con.prepareStatement(sqlSelect);
 
@@ -96,6 +95,7 @@ public class DAOGeneric extends DAOConexao {
 		}
 //		(? ? ? ?)
 //		setObjet()
+// nome = 'kaleb',idade = 17
 		for (; indice < camposNome.size(); indice++) {
 			formato += camposNome.get(indice) + "=" + "'" + camposValor.get(indice) + "'" + " ,";
 		}

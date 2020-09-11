@@ -93,6 +93,12 @@ public class Pessoa extends Tabela<Integer> {
 		list.add("pet");
 		return list;
 	}
+	
+	@Override
+	public String getNomeColuna() {
+		String game = "id,nome,descricao,data_lancamento,is_jogo_do_ano,criacao,modificacao";
+		return game;
+	}
 
 	@Override
 	public Boolean isPkSerial() {
@@ -115,6 +121,7 @@ public class Pessoa extends Tabela<Integer> {
 		//dao.inserir(p);
 		dao.atualizar(a.get(0));
 	}
+
 
 	
 
