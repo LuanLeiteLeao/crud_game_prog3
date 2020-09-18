@@ -1,4 +1,4 @@
-package model;
+package modelo;
 
 import java.util.List;
 
@@ -16,16 +16,12 @@ public abstract class Tabela<TipoPK> {
 		this.pk = pk;
 	}
 	
-	
-	
 	public abstract String getNomeTabela();
 	public abstract void setCamposTabela(List<Object> list); 
 	public abstract Tabela getNovoObjeto(); 
 	public abstract String getNomePk(); 
 	public abstract List<Object> getCamposValor(); 
 	public abstract List<String> getCamposNome();
+	public abstract String getCamposNomeStr();
 	public abstract Boolean isPkSerial();
-	public abstract List<String> getNomeColuna();
-	
-	
 }

@@ -1,14 +1,21 @@
-package test;
+package modelo;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Tabela;
+public class Generos extends Tabela<Integer> {
 
-public class Jogos extends Tabela<Integer> {
-
+	private Integer id;
 	private String nome;
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -16,15 +23,15 @@ public class Jogos extends Tabela<Integer> {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
 	@Override
 	public String getNomeTabela() {
-		return "games";
+		return "Generos";
 	}
 
 	@Override
 	public void setCamposTabela(List<Object> list) {
-		setPk((Integer)list.get(0));
+		setId((Integer)list.get(0));
 		setNome((String)list.get(1));
 		
 	}
@@ -32,7 +39,7 @@ public class Jogos extends Tabela<Integer> {
 	@Override
 	public Tabela getNovoObjeto() {
 		// TODO Auto-generated method stub
-		return new Jogos();
+		return new Generos();
 	}
 
 	@Override
@@ -43,14 +50,15 @@ public class Jogos extends Tabela<Integer> {
 
 	@Override
 	public List<Object> getCamposValor() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public List<String> getCamposNome() {
-		// TODO Auto-generated method stub
-		return null;
+		List<String> campos = new ArrayList<>();
+		campos.add("id");
+		campos.add("nome");
+		return campos;
 	}
 
 	@Override
@@ -60,10 +68,14 @@ public class Jogos extends Tabela<Integer> {
 	}
 
 	@Override
-	public List<String> getNomeColuna() {
-		List<String> game = new ArrayList();
-		game.add("");
-		return game;
+	public String getCamposNomeStr() {
+		List<String> listcampos = getCamposNome();
+		String campos = new String();
+		for (int i=0;i<listcampos.size(); i++) {
+			campos=campos.concat(listcampos.get(i)+",");
+		}
+		campos=campos.substring(0,campos.length()-1);
+		return campos;
 	}
 
 }

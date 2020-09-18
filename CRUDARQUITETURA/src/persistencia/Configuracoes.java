@@ -1,4 +1,4 @@
-package util;
+package persistencia;
 
 import java.io.IOException;
 import java.util.Properties;

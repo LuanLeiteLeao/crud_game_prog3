@@ -1,4 +1,4 @@
-package model;
+package persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import mensagem.Mensagem;
 import mensagem.PersistenciaMensagem;
+import modelo.Tabela;
 
 public class DAOGeneric extends DAOConexao {
 	private PersistenciaMensagem mensagem = new PersistenciaMensagem();
@@ -28,10 +29,10 @@ public class DAOGeneric extends DAOConexao {
 	public <T extends Tabela<?>> ArrayList<T> listar(T tabela) {
 //		nao é bom passar *, nao é uma boa pratica
 //		passar a lista de campos, pois aordem de campos pode mudar
-		String sqlSelect = "select " + tabela.getNomeColuna() + " from " + tabela.getNomeTabela();
+		//String sqlSelect = "select " + tabela.getCamposNomeStr() + " from " + tabela.getNomeTabela();
+		String sqlSelect = "select " + tabela.getCamposNomeStr() + " from " + tabela.getNomeTabela();
 		ArrayList<T> lista = new ArrayList<>();
 		PreparedStatement stmt;
-		System.out.println(sqlSelect);
 		try {
 			stmt = (PreparedStatement) this.con.prepareStatement(sqlSelect);
 
@@ -141,9 +142,6 @@ public class DAOGeneric extends DAOConexao {
 	public <T extends Tabela<?>> String prepararCamposValor(T tabela) {
 		List<Object> camposNome = tabela.getCamposValor();
 
-		if (tabela.isPkSerial())
-			camposNome.remove(0);
-
 		String formato = "(";
 
 		for (Object campo : camposNome)
@@ -155,7 +153,7 @@ public class DAOGeneric extends DAOConexao {
 	}
 
 	public <T extends Tabela<?>> void inserir(T tabela) {
-		String sql = "insert into " + tabela.getNomeTabela() + " " + prepararCamposNome(tabela) + " values"
+		String sql = "insert into " + tabela.getNomeTabela() + " values"
 				+ prepararCamposValor(tabela);
 
 		System.out.println(sql);
