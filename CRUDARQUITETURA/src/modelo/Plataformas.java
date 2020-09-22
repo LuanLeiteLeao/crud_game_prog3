@@ -8,6 +8,11 @@ public class Plataformas extends Tabela<Integer> {
 	private Integer id;
 	private String nome;
 	
+	public Plataformas(Integer id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -39,7 +44,7 @@ public class Plataformas extends Tabela<Integer> {
 	@Override
 	public Tabela getNovoObjeto() {
 		// TODO Auto-generated method stub
-		return new Plataformas();
+		return new Plataformas(id, nome);
 	}
 
 	@Override
@@ -50,7 +55,10 @@ public class Plataformas extends Tabela<Integer> {
 
 	@Override
 	public List<Object> getCamposValor() {
-		return null;
+		List<Object> campos = new ArrayList<>();
+		campos.add(id);
+		campos.add(nome);
+		return campos;
 	}
 
 	@Override

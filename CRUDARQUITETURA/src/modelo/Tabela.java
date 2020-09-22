@@ -2,8 +2,6 @@ package modelo;
 
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 
 public abstract class Tabela<TipoPK> {
 	private TipoPK pk;
@@ -12,8 +10,8 @@ public abstract class Tabela<TipoPK> {
 	public TipoPK getPk() {
 		return pk;
 	}
-	public void setPk(TipoPK pk) {
-		this.pk = pk;
+	public void setPk(Object pk) {
+		this.pk = (TipoPK) pk;
 	}
 	
 	public abstract String getNomeTabela();

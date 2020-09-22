@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,11 @@ public class Games_has_generos extends Tabela<Integer> {
 
 	private Integer games_id;
 	private Integer generos_id;
+	
+	public Games_has_generos(Integer games_id, Integer generos_id) {
+		this.games_id = games_id;
+		this.generos_id = generos_id;
+	}
 	
 	public Integer getGames_id() {
 		return games_id;
@@ -38,7 +44,7 @@ public class Games_has_generos extends Tabela<Integer> {
 	@Override
 	public Tabela getNovoObjeto() {
 		// TODO Auto-generated method stub
-		return new Games_has_generos();
+		return new Games_has_generos(games_id, games_id);
 	}
 
 	@Override

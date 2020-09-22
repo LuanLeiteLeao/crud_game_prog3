@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +8,11 @@ public class Generos extends Tabela<Integer> {
 
 	private Integer id;
 	private String nome;
+	
+	public Generos(Integer id, String nome) {
+		this.id = id;
+		this.nome = nome;
+	}
 	
 	public Integer getId() {
 		return id;
@@ -39,7 +45,7 @@ public class Generos extends Tabela<Integer> {
 	@Override
 	public Tabela getNovoObjeto() {
 		// TODO Auto-generated method stub
-		return new Generos();
+		return new Generos(id, nome);
 	}
 
 	@Override
@@ -50,7 +56,10 @@ public class Generos extends Tabela<Integer> {
 
 	@Override
 	public List<Object> getCamposValor() {
-		return null;
+		List<Object> campos = new ArrayList<>();
+		campos.add(id);
+		campos.add(nome);
+		return campos;
 	}
 
 	@Override

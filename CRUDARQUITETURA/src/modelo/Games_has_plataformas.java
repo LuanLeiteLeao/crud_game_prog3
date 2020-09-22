@@ -7,6 +7,11 @@ public class Games_has_plataformas extends Tabela<Integer> {
 
 	private Integer games_id;
 	private Integer plataformas_id;
+	
+	public Games_has_plataformas(Integer games_id, Integer plataformas_id) {
+		this.games_id = games_id;
+		this.plataformas_id = plataformas_id;
+	}
 
 	public Integer getGames_id() {
 		return games_id;
@@ -38,7 +43,7 @@ public class Games_has_plataformas extends Tabela<Integer> {
 	@Override
 	public Tabela getNovoObjeto() {
 		// TODO Auto-generated method stub
-		return new Games_has_plataformas();
+		return new Games_has_plataformas(games_id, games_id);
 	}
 
 	@Override

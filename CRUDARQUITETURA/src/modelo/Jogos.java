@@ -13,6 +13,16 @@ public class Jogos extends Tabela<Integer> {
 	private Integer is_jogo_do_ano;
 	private Date criacao;
 	private Date modificacao;
+	
+	public Jogos(Integer id, String nome, String descricao,Date data_lancamento,Integer is_jogo_do_ano,Date criacao,Date modificacao) {
+		this.id = id;
+		this.nome = nome;
+		this.descricao = descricao;
+		this.data_lancamento = data_lancamento;
+		this.is_jogo_do_ano = is_jogo_do_ano;
+		this.criacao = criacao;
+		this.modificacao = modificacao;
+	}
 
 	public Integer getId() {
 		return id;
@@ -90,7 +100,7 @@ public class Jogos extends Tabela<Integer> {
 	@Override
 	public Tabela getNovoObjeto() {
 		// TODO Auto-generated method stub
-		return new Jogos();
+		return new Jogos(id, descricao, descricao, criacao, id, criacao, modificacao);
 	}
 
 	@Override
